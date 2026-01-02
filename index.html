@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BEOLF O.G ANIMATIONS - High-Quality 3D Minecraft Animations, Thumbnails, and Video Editing.">
+    <title>BEOLF O.G ANIMATIONS | 3D Minecraft Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================
+           CSS VARIABLES & RESET
+           ========================================= */
+        :root {
+            /* Colors */
+            --bg-dark: #0a0a0e;
+            --bg-card: rgba(30, 30, 40, 0.6);
+            --text-main: #ffffff;
+            --text-muted: #a0a0b0;
+            --border-glass: rgba(255, 255, 255, 0.1);
+            
+            /* Gradients */
+            --grad-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --grad-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --grad-minecraft: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%); /* Creeper vibes */
+            --grad-glow: radial-gradient(circle at center, rgba(118, 75, 162, 0.15) 0%, transparent 70%);
+
+            /* Typography */
+            --font-head: 'Outfit', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+
+            /* Spacing */
+            --section-padding: 100px 20px;
+            --container-width: 1200px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .gradient-text {
+            background: var(--grad-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-title {
+            font-family: var(--font-head);
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--grad-accent);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* =========================================
+           NAVIGATION
+           ========================================= */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 1000;
+            transition: 0.3s;
+            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 14, 0.7);
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-head);
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--grad-accent);
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: white;
+            background: none;
+            border: none;
+        }
+
+        /* =========================================
+           HERO SECTION
+           ========================================= */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #000 100%);
+        }
+
+        /* Particle/Grid Background Effect */
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 1;
+            mask-image: radial-gradient(circle, black 40%, transparent 80%);
+        }
+
+        .hero-content {
+            z-index: 2;
+            padding: 0 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.5s;
+        }
+
+        .hero-name {
+            font-family: var(--font-head);
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            height: 30px; /* Prevent layout shift */
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 35px;
+            background: var(--grad-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(118, 75, 162, 0.4);
+        }
+
+        /* Scroll Down Indicator */
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            opacity: 0.7;
+            z-index: 2;
+        }
+
+        /* =========================================
+           ABOUT SECTION
+           ========================================= */
+        #about {
+            padding: var(--section-padding);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--border-glass);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--grad-minecraft);
+        }
+
+        .stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: #84fab0; /* Minecraft Green */
+            font-family: var(--font-head);
+            margin-bottom: 5px;
+        }
+
+        .stat-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* =========================================
+           SKILLS SECTION
+           ========================================= */
+        #skills {
+            padding: var(--section-padding);
+            background: rgba(0,0,0,0.3);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--border-glass);
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: var(--grad-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* =========================================
+           PROJECTS / SHOWCASE SECTION
+           ========================================= */
+        #projects {
+            padding: var(--section-padding);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--border-glass);
+            transition: 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .project-info p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .center-btn {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        /* =========================================
+           CONTACT SECTION
+           ========================================= */
+        #contact {
+            padding: var(--section-padding);
+            background: linear-gradient(180deg, transparent 0%, rgba(30, 30, 40, 0.4) 100%);
+        }
+
+        .contact-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-glass);
+            border-radius: 8px;
+            color: #fff;
+            font-family: var(--font-body);
+            transition: 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: 0.3s;
+            border: 1px solid var(--border-glass);
+        }
+
+        .social-icon:hover {
+            background: var(--grad-primary);
+            transform: scale(1.1);
+        }
+
+        /* Form Feedback */
+        .form-message {
+            margin-top: 15px;
+            text-align: center;
+            display: none;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .form-message.success {
+            display: block;
+            background: rgba(86, 171, 47, 0.2);
+            color: #a8e063;
+            border: 1px solid #56ab2f;
+        }
+
+        /* =========================================
+           FOOTER
+           ========================================= */
+        footer {
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid var(--border-glass);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Scroll Top Button */
+        #scrollTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--grad-primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.3s;
+            z-index: 99;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: none;
+            font-size: 1.2rem;
+        }
+
+        #scrollTop.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* =========================================
+           ANIMATIONS & MEDIA QUERIES
+           ========================================= */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
+            40% {transform: translateX(-50%) translateY(-10px);}
+            60% {transform: translateX(-50%) translateY(-5px);}
+        }
+
+        /* Reveal on Scroll Class */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                right: 0;
+                width: 100%;
+                background: rgba(10, 10, 14, 0.95);
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 0;
+                clip-path: circle(0px at 90% -10%);
+                transition: 0.5s ease-in-out;
+            }
+
+            .nav-links.active {
+                clip-path: circle(1000px at 90% -10%);
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-name {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button id="scrollTop" aria-label="Scroll to top">↑</button>
+
+    <nav>
+        <div class="container nav-container">
+            <a href="#" class="logo">BEOLF <span class="gradient-text">O.G</span></a>
+            
+            <button class="menu-btn" aria-label="Toggle menu">☰</button>
+            
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="https://www.youtube.com/@beolfog/featured" target="_blank" style="color: #ff0000;">YouTube</a></li> 
+            </ul>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <div class="hero-content">
+            <h1 class="hero-name">BEOLF <span class="gradient-text">O.G</span><br>ANIMATIONS</h1>
+            <p class="hero-subtitle" id="typewriter"></p> <a href="#projects" class="btn">View My Work</a>
+        </div>
+        <div class="scroll-down" style="color: white; font-size: 2rem;">↓</div>
+    </section>
+
+    <section id="about" class="reveal">
+        <div class="container">
+            <h2 class="section-title">Who Am I?</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p style="font-size: 1.1rem; margin-bottom: 20px; color: #ddd;">
+                        I am a passionate 3D Animator specializing in Minecraft content. With an eye for cinematic composition and fluid movement, I bring blocky worlds to life. Whether it's high-octane PvP montages or story-driven machinima, I focus on quality and storytelling.
+                    </p>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <h3>3+</h3>
+                            <p>Years Creating</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>1+</h3>
+                            <p>Years Specializing</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>100+</h3>
+                            <p>Projects Done</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-card">
+                    <h3 style="margin-bottom: 15px;">My Mission</h3>
+                    <p style="color: var(--text-muted);">
+                        To provide the highest quality Minecraft animations and thumbnails that help creators stand out in a crowded market. I treat every frame like a piece of art.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="reveal">
+        <div class="container">
+            <h2 class="section-title">My Toolkit</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">🎬</div>
+                    <h3>3D Animation</h3>
+                    <p style="color: var(--text-muted); margin-top: 10px;">
+                        Expert in Mine-imator. Creating smooth character movements, dynamic camera work, and realistic lighting.
+                    </p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🎨</div>
+                    <h3>Thumbnail Design</h3>
+                    <p style="color: var(--text-muted); margin-top: 10px;">
+                        High-CTR composition, color correction, and rendering. Making people click on your videos.
+                    </p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">✂️</div>
+                    <h3>Video Editing</h3>
+                    <p style="color: var(--text-muted); margin-top: 10px;">
+                        Post-production effects, sound design, and pacing to keep viewers retention high.
+                    </p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🧊</div>
+                    <h3>Modelbench</h3>
+                    <p style="color: var(--text-muted); margin-top: 10px;">
+                        Custom asset creation and rigging to make unique characters and items for animations.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="reveal">
+        <div class="container">
+            <h2 class="section-title">Featured Work</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 40px;">Check out my latest animations and designs.</p>
+            
+            <div class="video-grid">
+                <div class="project-card">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/mA8aBJBhLTk?si=iPIrEQ9tGAokLepE" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="project-info">
+                        <h4>OG VALLEY SERIERS</h4>
+                        <p>High energy editing with custom particle effects.</p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/MRrZGtFCtGw?si=ZcMTI2n7cOTWlrof" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="project-info">
+                        <h4>THE CURSED WORLD SERIERS</h4>
+                        <p>Cinematic camera paths and lighting setup.</p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/X9r4Erkxhdc?si=HYuU6sFPnySImMrx" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="project-info">
+                        <h4>BEOLF OFFICAL SMP TRAILER</h4>
+                        <p>Full character rigging and lip-syncing.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="center-btn">
+                <a href="https://www.youtube.com/@beolfog/videos" target="_blank" class="btn" style="background: #ff0000;">View More on YouTube</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="reveal">
+        <div class="container">
+            <h2 class="section-title">Let's Create</h2>
+            <div class="contact-container">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" class="form-control" required placeholder="Steve">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" required placeholder="steve@minecraft.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectType">Project Type</label>
+                        <select id="projectType" class="form-control">
+                            <option value="Animation">3D Animation</option>
+                            <option value="Thumbnail">Thumbnail Design</option>
+                            <option value="Editing">Video Editing</option>
+                            <option value="Other">Other Inquiry</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-control" required placeholder="Tell me about your project idea..."></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                    <div id="formFeedback" class="form-message">
+                        Message sent! I'll get back to you soon.
+                    </div>
+                </form>
+
+                <div class="social-links">
+                    <a href="#" class="social-icon" aria-label="Twitter">𝕏</a>
+                    <a href="#" class="social-icon" aria-label="Discord">💬</a>
+                    <a href="#" class="social-icon" aria-label="Instagram">📷</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 BEOLF O.G ANIMATIONS. All rights reserved.</p>
+            <p style="margin-top: 10px; opacity: 0.6; font-size: 0.8rem;">Built with passion for Minecraft creativity.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Mobile Menu Toggle
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuBtn.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Close menu when link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuBtn.innerHTML = '☰';
+            });
+        });
+
+        // 2. Typing Effect for Subtitle
+        const textElement = document.getElementById('typewriter');
+        const phrases = ["3D Minecraft Animator", "Thumbnail Designer", "Video Editor"];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typeSpeed = 100;
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                textElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                typeSpeed = 50;
+            } else {
+                textElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                typeSpeed = 100;
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                isDeleting = true;
+                typeSpeed = 2000; // Pause at end
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typeSpeed = 500; // Pause before new word
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+
+        // Start typing effect on load
+        document.addEventListener('DOMContentLoaded', type);
+
+        // 3. Scroll Reveal Animation using Intersection Observer
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        revealElements.forEach(element => {
+            revealObserver.observe(element);
+        });
+
+        // 4. Contact Form Handling (Simulation)
+        const form = document.getElementById('contactForm');
+        const feedback = document.getElementById('formFeedback');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Simulate sending
+            const btn = form.querySelector('button');
+            const originalText = btn.innerText;
+            
+            btn.innerText = "Sending...";
+            btn.style.opacity = "0.7";
+            
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.opacity = "1";
+                feedback.classList.add('success');
+                form.reset();
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    feedback.classList.remove('success');
+                }, 5000);
+            }, 1500);
+        });
+
+        // 5. Scroll To Top Button logic
+        const scrollTopBtn = document.getElementById('scrollTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                scrollTopBtn.classList.add('active');
+            } else {
+                scrollTopBtn.classList.remove('active');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
